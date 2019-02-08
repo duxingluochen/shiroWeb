@@ -1,5 +1,6 @@
 package com.tuke.servlet;
 
+import com.tuke.util.CryptographyUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
@@ -26,8 +27,14 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, CryptographyUtil.md5(password,"12345"));
         try {
+            //判断是否记住我
+            if(subject.isRemembered()){
+                System.out.println("---isRememberMe---");
+            }else {
+                token.setRememberMe(true);
+            }
             subject.login(token);
             Session session = subject.getSession();
             System.out.println("sessionId:"+session.getId());

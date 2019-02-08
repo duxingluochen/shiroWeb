@@ -48,6 +48,8 @@ public class MyRealm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
+
+
     /**
      * 1.身份认证
      * @param token

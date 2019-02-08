@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * master更新
+ */
 public class UserDao {
 
     /**
